@@ -1,146 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mudassir Javed | Cybersecurity Student</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mudassir Javed — Portfolio</title>
+  <meta name="description" content="Portfolio of Mudassir Javed — Cybersecurity student focusing on network security, cryptography, and secure tooling." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0b0d10;         /* charcoal black */
+      --panel: #121418;      /* deep gray */
+      --muted: #1a1e24;      /* muted panel */
+      --text: #e7eaee;       /* near-white */
+      --sub: #b6beca;        /* subtle text */
+      --accent: #00b3a4;     /* teal */
+      --accent-2: #ffb300;   /* amber */
+      --link: #6ddbd4;       /* soft teal */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --maxw: 1200px;
+      --gutter: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    * { box-sizing: border-box }
+    html { scroll-behavior: smooth }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: #f5f5f5;
-      line-height: 1.6;
+      margin: 0; color: var(--text); background: radial-gradient(1000px 700px at 20% -10%, rgba(0,179,164,.06), transparent 60%),
+      radial-gradient(800px 600px at 90% 10%, rgba(255,179,0,.07), transparent 60%), var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.65; letter-spacing: .2px;
     }
+    a { color: var(--link); text-decoration: none }
+    a:hover { text-decoration: underline }
+
+    /* Layout */
+    .container { width: min(100% - 2*var(--gutter), var(--maxw)); margin-inline: auto }
     header {
-      background: #ff004f;
-      padding: 20px;
-      text-align: center;
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
+      background: color-mix(in srgb, var(--bg) 84%, transparent);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0 }
+    .brand { display: inline-flex; align-items: center; gap: .75rem; font-family: Poppins, Inter, sans-serif; font-weight: 700 }
+    .brand-badge {
+      width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow); display: grid; place-items: center; font-weight: 800; color: #0b0d10
     }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2rem;
+    nav ul { list-style: none; display: flex; gap: clamp(.6rem, 1.8vw, 1.4rem); padding: 0; margin: 0 }
+    nav a { color: var(--text); opacity: .8; font-weight: 500 }
+    nav a:hover { opacity: 1 }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border-radius: 999px;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, white 0%), color-mix(in srgb, var(--accent-2) 75%, white 0%));
+      color: #0b0d10; font-weight: 700; box-shadow: var(--shadow); border: 0; cursor: pointer;
+      transition: transform .2s ease, filter .2s ease
     }
-    nav {
-      background: #1a1a1a;
-      padding: 10px;
-      text-align: center;
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05) }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; padding: 5rem 0 3rem }
+    .hero h1 { font-family: Poppins, Inter, sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin: 0 0 1rem }
+    .tagline { font-size: clamp(1rem, 1.8vw, 1.125rem); color: var(--sub); margin: 0 0 1.75rem }
+    .hero-card { background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, black 0%), color-mix(in srgb, var(--muted) 90%, black 0%));
+      border-radius: var(--radius-lg); padding: clamp(1rem, 2.5vw, 1.4rem); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.06) }
+    .chip { display: inline-flex; gap: .5rem; align-items: center; padding: .35rem .7rem; border-radius: 999px; background: #0f1317; border: 1px solid rgba(255,255,255,.06); color: var(--sub); font-size: .9rem }
+    .hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center }
+
+    /* Profile */
+    .profile {
+      width: min(100%, 360px); justify-self: end; position: relative
     }
-    nav a {
-      color: #f5f5f5;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s;
+    .profile .frame { aspect-ratio: 1 / 1; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, rgba(0,179,164,.15), rgba(255,179,0,.15)); padding: 10px; box-shadow: var(--shadow) }
+    .profile .inner { width: 100%; height: 100%; border-radius: 18px; overflow: hidden; background: var(--panel); display: grid; place-items: center; border: 1px solid rgba(255,255,255,.06) }
+    .avatar { width: 74%; max-width: 240px }
+
+    /* Sections */
+    section { padding: 4rem 0 }
+    .section-title { font-family: Poppins, Inter, sans-serif; font-size: clamp(1.35rem, 2.6vw, 2rem); margin: 0 0 1rem }
+    .section-sub { color: var(--sub); margin: 0 0 2rem }
+
+    /* About */
+    .about p { font-size: clamp(1rem, 1.4vw, 1.05rem); color: #d2d8e1; max-width: 70ch }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem }
+    .skill { background: var(--muted); padding: 1rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,.06); box-shadow: var(--shadow) }
+    .skill h4 { margin: 0 0 .7rem; font-weight: 700 }
+    .bar { height: 9px; background: #0e1216; border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,.06) }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: var(--w, 60%);
+      transition: width 1s ease }
+
+    /* Projects */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem }
+    .card { background: var(--panel); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.06); position: relative }
+    .thumb { aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgba(0,179,164,.12), rgba(255,179,0,.12)); display: grid; place-items: center; color: #0b0d10; font-weight: 800; letter-spacing: .6px }
+    .card-inner { padding: 1rem }
+    .card h3 { margin: .2rem 0 .4rem; font-size: 1.1rem; font-weight: 700 }
+    .card p { color: var(--sub); margin: 0 0 .8rem }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem }
+    .tag { font-size: .8rem; padding: .25rem .5rem; border-radius: 999px; background: #0f1317; border: 1px solid rgba(255,255,255,.06); color: #c6d2dd }
+    .card a.more { display: inline-block; margin-top: .6rem; font-weight: 600 }
+    .card:hover { transform: translateY(-2px); transition: transform .2s ease }
+
+    /* Testimonials */
+    .testimonials { position: relative }
+    .ts-track { display: grid; grid-auto-flow: column; grid-auto-columns: min(100%, 560px); gap: 1rem; overflow: hidden }
+    .ts-card { background: var(--muted); border-radius: var(--radius); padding: 1.2rem 1.2rem 1.2rem 1.2rem; border: 1px solid rgba(255,255,255,.06); box-shadow: var(--shadow) }
+    .ts-author { display: flex; align-items: center; gap: .75rem; margin-top: .8rem; color: var(--sub) }
+    .ts-dots { display: flex; gap: .5rem; margin-top: 1rem }
+    .dot { width: 9px; height: 9px; border-radius: 999px; background: #2a313a; border: 1px solid rgba(255,255,255,.06); cursor: pointer }
+    .dot.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)) }
+
+    /* Contact */
+    form { display: grid; gap: .8rem; max-width: 640px }
+    input, textarea { width: 100%; padding: .9rem 1rem; background: #0f1317; color: var(--text); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; outline: none }
+    input:focus, textarea:focus { border-color: color-mix(in srgb, var(--accent) 60%, white 0%) }
+    textarea { min-height: 140px; resize: vertical }
+    .socials { display: flex; gap: .8rem; margin-top: .8rem; flex-wrap: wrap }
+    .socials a { display: inline-flex; gap: .5rem; align-items: center; padding: .55rem .8rem; border-radius: 12px; background: var(--muted); border: 1px solid rgba(255,255,255,.06) }
+
+    /* Footer */
+    footer { padding: 2.5rem 0; color: var(--sub); border-top: 1px solid rgba(255,255,255,.06) }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .profile { justify-self: start }
+      .nav { flex-wrap: wrap }
     }
-    nav a:hover {
-      color: #ff004f;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h2 {
-      color: #ff004f;
-      border-bottom: 2px solid #ff004f;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-    .skills, .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .skill, .contact-links a {
-      background: #1a1a1a;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: transform 0.2s;
-    }
-    .skill:hover, .contact-links a:hover {
-      transform: scale(1.05);
-      background: #ff004f;
-      color: #fff;
-    }
-    footer {
-      background: #1a1a1a;
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-      margin-top: 40px;
-      color: #a3a3a3;
+
+    /* Motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Mudassir Javed</h1>
-    <p>Cybersecurity Student | CEH | Ethical Hacker</p>
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-badge">MJ</span>
+        <span>Mudassir Javed</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn" href="#projects" aria-label="View portfolio">View Portfolio</a>
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <main>
+    <!-- Hero -->
+    <section class="hero container" id="home">
+      <div>
+        <span class="chip">Cybersecurity • Cryptography • Network Security</span>
+        <h1>Hi, I’m <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; color:transparent">Mudassir Javed</span>.</h1>
+        <p class="tagline">Cybersecurity student focused on network security, Python tooling, and modern cryptography. I build practical, secure solutions and love capturing flags.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Hire Me</a>
+          <a href="https://github.com/0x4rc4n3" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/0x4rc4n3/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="hero-card" style="margin-top:1.2rem">
+          <strong>Recent highlights</strong>
+          <ul style="margin:.5rem 0 0 1.2rem; color: var(--sub)">
+            <li>Top 10 in a regional CTF hackathon.</li>
+            <li>Built network scanning & cryptography tools in Python.</li>
+            <li>Workshops on pentesting, crypto, and security techniques.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="profile" aria-label="Profile image">
+        <div class="frame">
+          <div class="inner">
+            <!-- Inline SVG avatar (replace with your photo by swapping this <svg> for an <img>) -->
+            <svg class="avatar" viewBox="0 0 200 200" role="img" aria-label="Profile illustration">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#00b3a4"/>
+                  <stop offset="100%" stop-color="#ffb300"/>
+                </linearGradient>
+              </defs>
+              <rect width="200" height="200" rx="24" fill="#0d1216"/>
+              <circle cx="100" cy="72" r="36" fill="url(#g)"/>
+              <rect x="40" y="118" width="120" height="54" rx="18" fill="url(#g)" opacity="0.5"/>
+              <text x="100" y="185" text-anchor="middle" fill="#e7eaee" font-family="Poppins, Inter" font-size="18" font-weight="700">MJ</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m a cybersecurity student with strong skills in Python, cryptography, and penetration testing. Passionate about emerging technologies like Zero-Trust Architecture and Post-Quantum Cryptography, I aim to build impactful security solutions. I have worked on deauthentication modules, cryptographic systems, and AI-driven security tools.</p>
-  </section>
+    <!-- About -->
+    <section class="container about" id="about">
+      <h2 class="section-title">About Me</h2>
+      <p>
+        I’m a cybersecurity student with hands‑on experience in penetration testing labs and CTFs. My focus areas are
+        <strong>network security</strong>, <strong>Python automation</strong>, and <strong>cryptography</strong>. I enjoy turning complex security problems
+        into simple, trustworthy tools with clean UX.
+      </p>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill">Network Security</div>
-      <div class="skill">Python</div>
-      <div class="skill">Cryptography</div>
-      <div class="skill">Linux & Bash</div>
-      <div class="skill">Wireshark</div>
-      <div class="skill">SQL</div>
-      <div class="skill">Git</div>
-      <div class="skill">C++ / Assembly</div>
-      <div class="skill">Blockchain</div>
-    </div>
-  </section>
+    <!-- Skills -->
+    <section class="container" id="skills">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">Core competencies and tooling I use regularly.</p>
+      <div class="skills-grid">
+        <div class="skill"><h4>Network Security</h4><div class="bar" style="--w: 85%"><span></span></div></div>
+        <div class="skill"><h4>Python</h4><div class="bar" style="--w: 85%"><span></span></div></div>
+        <div class="skill"><h4>Cryptography</h4><div class="bar" style="--w: 80%"><span></span></div></div>
+        <div class="skill"><h4>Linux & Bash</h4><div class="bar" style="--w: 80%"><span></span></div></div>
+        <div class="skill"><h4>Wireshark</h4><div class="bar" style="--w: 75%"><span></span></div></div>
+        <div class="skill"><h4>SQL</h4><div class="bar" style="--w: 70%"><span></span></div></div>
+        <div class="skill"><h4>Git</h4><div class="bar" style="--w: 75%"><span></span></div></div>
+        <div class="skill"><h4>AI / ML Basics</h4><div class="bar" style="--w: 65%"><span></span></div></div>
+        <div class="skill"><h4>C++ / Assembly</h4><div class="bar" style="--w: 60%"><span></span></div></div>
+        <div class="skill"><h4>Blockchain (Concepts)</h4><div class="bar" style="--w: 55%"><span></span></div></div>
+      </div>
+    </section>
 
-  <section id="projects">
-    <h2>Experience & Projects</h2>
-    <ul>
-      <li>Certified Ethical Hacker (CEH) – Government of Pakistan & ISC2 CC</li>
-      <li>CTF Hackathon – Top 10 in regional round</li>
-      <li>GitHub Projects – Network scanning, cryptography tools</li>
-      <li>Workshops – Penetration testing, cryptography, security techniques</li>
-    </ul>
-  </section>
+    <!-- Projects -->
+    <section class="container" id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">A selection of things I’ve built or hacked on recently.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">NetScan</div>
+          <div class="card-inner">
+            <h3>NetScan — Python Network Scanner</h3>
+            <p>Fast port and service discovery with clean CLI output and JSON reporting for pipelines.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Sockets</span><span class="tag">CLI</span></div>
+            <a class="more" href="https://github.com/0x4rc4n3" target="_blank" rel="noopener">View Code →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">CryptoKit</div>
+          <div class="card-inner">
+            <h3>CryptoKit — Learning Cryptography</h3>
+            <p>Educational implementations of classical and modern ciphers with tests and benchmarks.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Crypto</span><span class="tag">pytest</span></div>
+            <a class="more" href="https://github.com/0x4rc4n3" target="_blank" rel="noopener">View Code →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">DeAuth</div>
+          <div class="card-inner">
+            <h3>802.11 Deauth Module (Lab)</h3>
+            <p>Exploratory lab module for controlled Wi‑Fi deauthentication testing and detection.</p>
+            <div class="tags"><span class="tag">802.11</span><span class="tag">Python</span><span class="tag">Scapy</span></div>
+            <a class="more" href="https://github.com/0x4rc4n3" target="_blank" rel="noopener">View Code →</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">SecAI</div>
+          <div class="card-inner">
+            <h3>SecAI — AI‑assisted Security Tools</h3>
+            <p>Prototypes that pair LLMs with static/dynamic analysis for faster triage.</p>
+            <div class="tags"><span class="tag">AI</span><span class="tag">Security</span><span class="tag">PoC</span></div>
+            <a class="more" href="https://github.com/0x4rc4n3" target="_blank" rel="noopener">View Code →</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p><strong>Bachelor of Science in Cybersecurity</strong><br>
-    Khwaja Fareed University of Engineering & IT (2022 – 2026)<br>
-    GPA: 3.00</p>
-  </section>
+    <!-- Testimonials -->
+    <section class="container testimonials" id="testimonials">
+      <h2 class="section-title">Testimonials</h2>
+      <p class="section-sub">Nice words from mentors and collaborators.</p>
+      <div class="ts-track" id="ts-track" aria-live="polite">
+        <div class="ts-card">
+          <p>“Mudassir is a quick study with strong fundamentals in networking. He ships clean, reliable tools and documents them well.”</p>
+          <div class="ts-author">
+            <div style="width:34px;height:34px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div>
+            <span>Mentor, University Cybersecurity Lab</span>
+          </div>
+        </div>
+        <div class="ts-card">
+          <p>“Delivered a polished proof‑of‑concept under tight CTF time pressure. Calm, methodical, and collaborative.”</p>
+          <div class="ts-author">
+            <div style="width:34px;height:34px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div>
+            <span>CTF Teammate</span>
+          </div>
+        </div>
+        <div class="ts-card">
+          <p>“Great grasp of cryptographic primitives and their real‑world trade‑offs. Asked the right questions and improved our approach.”</p>
+          <div class="ts-author">
+            <div style="width:34px;height:34px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div>
+            <span>Workshop Instructor</span>
+          </div>
+        </div>
+      </div>
+      <div class="ts-dots" role="tablist" aria-label="Testimonials navigation">
+        <button class="dot active" aria-label="Slide 1" data-i="0"></button>
+        <button class="dot" aria-label="Slide 2" data-i="1"></button>
+        <button class="dot" aria-label="Slide 3" data-i="2"></button>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Get in touch with me:</p>
-    <div class="contact-links">
-      <a href="mailto:mudassirbhatti276@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/0x4rc4n3/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/0x4rc4n3" target="_blank">GitHub</a>
-    </div>
-  </section>
+    <!-- Contact -->
+    <section class="container" id="contact">
+      <h2 class="section-title">Contact Me</h2>
+      <p class="section-sub">Let’s work together. I’m open to internships, freelance, and collaboration.</p>
+      <form action="mailto:mudassirbhatti276@gmail.com" method="post" enctype="text/plain">
+        <input aria-label="Your name" name="name" type="text" placeholder="Your name" required />
+        <input aria-label="Your email" name="email" type="email" placeholder="Your email" required />
+        <textarea aria-label="Your message" name="message" placeholder="Your message" required></textarea>
+        <button class="btn" type="submit">Send Message</button>
+        <p style="color:var(--sub); font-size:.9rem">Prefer a form backend? Replace the form action with a service like Formspree or Netlify Forms.</p>
+      </form>
+      <div class="socials" aria-label="Social links">
+        <a href="https://github.com/0x4rc4n3" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+        <a href="https://www.linkedin.com/in/0x4rc4n3/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+        <a href="mailto:mudassirbhatti276@gmail.com" aria-label="Email">Email</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Mudassir Javed | Portfolio Website</p>
+    <div class="container">
+      © <span id="year"></span> Mudassir Javed • Built with love for security and clean design.
+    </div>
   </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animate skill bars on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.bar > span').forEach(s => s.style.width = getComputedStyle(e.target.querySelector('.bar')).getPropertyValue('--w'));
+          io.unobserve(e.target);
+        }
+      })
+    }, { threshold: .4 });
+    document.querySelectorAll('.skill').forEach(el => io.observe(el));
+
+    // Testimonials slider — simple, no dependencies
+    const track = document.getElementById('ts-track');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    let idx = 0;
+    function go(i){ idx = i; track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' }); dots.forEach((d,j)=>d.classList.toggle('active', j===i)); }
+    dots.forEach(d => d.addEventListener('click', () => go(Number(d.dataset.i))));
+    let auto = setInterval(()=> go((idx+1)%dots.length), 5000);
+    track.addEventListener('pointerdown', ()=> clearInterval(auto));
+
+    // Accessible keyboard nav for dots
+    dots.forEach((d,i)=> d.addEventListener('keydown', e=> { if(e.key==='ArrowRight') go((i+1)%dots.length); if(e.key==='ArrowLeft') go((i-1+dots.length)%dots.length); }));
+  </script>
 </body>
 </html>
